@@ -15,22 +15,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        SensorManager sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
         Sensor gyroscopeSensor=sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
-        SensorEventListener gyroscopeSensorListener = new SensorEventListener() {
+        SensorEventListener gyroscopeSensorListener=new SensorEventListener() {
             @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {
-                if(sensorEvent.values[2] > 0.5f) {
+            public void onSensorChanged(SensorEvent event) {
+                if(event.values[2]>0.5f){
                     getWindow().getDecorView().setBackgroundColor(Color.BLUE);
-                } else if(sensorEvent.values[2] < -0.5f) {
+                }else if(event.values[2]<-0.5f){
                     getWindow().getDecorView().setBackgroundColor(Color.YELLOW);
                 }
             }
+
             @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
             }
         };
-        sensorManager.registerListener(gyroscopeSensorListener,gyroscopeSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(gyroscopeSensorListener,gyroscopeSensor,SensorManager.SENSOR_DELAY_NORMAL);
+        
     }
 }
